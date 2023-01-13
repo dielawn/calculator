@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="everything">
+    <div class="calculator">
+        <div class="calculator_display">
+            <input class="input" id="solvedInput" type="text">
+            <input class="input" id="input" type="text" placeholder="80085">        
+        </div>
+        <div class="calculator_keys">
+        <div class="buttons">
+            <button class="delete" id="clear" data-action="clear">clr</button>
+            <button class="operator" id="divide" data-action="divide">/</button>
+            <button class="operator" id="times" data-action="multiply">*</button>
+            <button class="operator" id="subtract" data-action="subtract">-</button>
+
+            <div class="numKeys">
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>            
+            <button class="number" id="zero">0</button>
+            <button class="number" id="decimal">.</button>
+            </div>
+            <div class="plusEqual">
+            <button class="operator" id="plus" data-action="add">+</button>
+            <button class="equal" id="equal" data-action="solve">=</button>
+               
+            </div>
+           
+            
+            
+            
+            
+            
+        </div>
+    </div>
+    </div>
+    <div class="calcPrinter"><p id="equation"></p> </div>
+</div>
+    <script src="script2.js"></script>
+</body>
+</html>
