@@ -22,52 +22,55 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
+let currentOperator = null;
 
-function getOperatorNums(event){
-    if(event.target.matches('button')){
-        const action = event.target.getAttribute('data-action')
+let pendingResult = null;
+
+function getOperatorNums(event) {
+    num1 = Number(num1)
+    num2 = Number(num2)
+    if(event.target.matches('button')) {
+        const action = event.target.getAttribute('data-action');
         if((action === 'add') || 
         (action === 'subtract') ||
         (action === 'multiply') ||
-        (action === 'divide')){
-            operator = event.target.textContent;     
-            if(num2 != null){
-            result = getResult(num1, operator, num2)
-            previousOperator = operator
-            solvedInput.value = `${Number(num1)} ${previousOperator} ${Number(num2)} = `;
-            
-            operator = event.target.textContent
-            
-           
-            console.log(num1, previousOperator, num2, operator)
-           
-           
-            num1 = input.value
-           
+        (action === 'divide')) {
+            if(operator != null) {
+                let previousOperator = operator
+                result = getResult(num1, operator, num2)
+                operator = event.target.textContent
+                
+                solvedInput.value = `${Number(num1)} ${previousOperator} ${Number(num2)} =`;
+                num1 = input.value;
+                num2 = null;
+                
+             
         }
-        }     
+            operator = event.target.textContent;
+        }
     }
-    if (event.target.matches('.number')){
-        if(operator){
+    if (event.target.matches('.number')) {
+        if(operator) {
             if (num2 === null) {
                 num2 = 0;
             }
             num2 += event.target.textContent;
-           
-        }else{
+        } else {
             if (num1 === null) {
                 num1 = 0;
             }
             num1 += event.target.textContent;
-            console.log(num1)
-        }   
-    }   
+        }
+    }
 }
+
+
 
 function getResult(num1, operator, num2){
     console.log(num1)
     num1 = Number(num1)
     num2 = Number(num2)
+    console.log(num1)
     let result;
     if(operator === '+'){
         let result = add(num1, num2) 
@@ -86,6 +89,7 @@ function getResult(num1, operator, num2){
         let result = divide(num1, num2)
         input.value = result
     }    
+    return result
 }
 
 
