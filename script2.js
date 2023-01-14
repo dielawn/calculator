@@ -41,7 +41,7 @@ function getOperatorNums(event){
            
             console.log(num1, previousOperator, num2, operator)
            
-            num2 = null
+           
             num1 = input.value
            
         }
