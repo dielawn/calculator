@@ -103,6 +103,13 @@ allButtons.forEach(button => {
         getOperatorNums(event);
         display(event);
         if(button.textContent === '='){    
+            if(operator === null){
+                let satoshis = Number(num1) * 100000000;
+                let satoshisWithCommas = satoshis.toLocaleString();
+                solvedInput.value =`${Number(num1)} BTC = `
+                input.value = `${satoshisWithCommas} Sats  `
+                return
+            }
             solvedInput.value = `${Number(num1)} ${operator} ${Number(num2)} =`;
             num1 = input.value;
             num2 = 0;   
@@ -111,3 +118,4 @@ allButtons.forEach(button => {
         }    
     });
 });
+
