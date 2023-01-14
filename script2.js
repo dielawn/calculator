@@ -12,7 +12,8 @@ let input = document.getElementById('input')
 
 let num1 = null;
 let num2 = null;
-let operator;
+let operator = null;
+let previousOperator = null;
 let result = getResult(Number(num1), operator, Number(num2));
 
 //sets content of inputs
@@ -29,8 +30,21 @@ function getOperatorNums(event){
         (action === 'subtract') ||
         (action === 'multiply') ||
         (action === 'divide')){
-           operator = event.target.textContent;
+            operator = event.target.textContent;     
+            if(num2 != null){
+            result = getResult(num1, operator, num2)
+            previousOperator = operator
+            solvedInput.value = `${Number(num1)} ${previousOperator} ${Number(num2)} = `;
+            
+            operator = event.target.textContent
+            
            
+            console.log(num1, previousOperator, num2, operator)
+           
+            num2 = null
+            num1 = input.value
+           
+        }
         }     
     }
     if (event.target.matches('.number')){
@@ -39,7 +53,7 @@ function getOperatorNums(event){
                 num2 = 0;
             }
             num2 += event.target.textContent;
-            console.log(num2)
+           
         }else{
             if (num1 === null) {
                 num1 = 0;
@@ -77,20 +91,21 @@ function getResult(num1, operator, num2){
 
 
 function display(event) {
-    if (event.target.matches('button')) {
-        const key = event.target.textContent
+    const key = event.target.textContent
+    if (event.target.matches('button')) {        
         input.value += key
-                       
     }
-   //moves equation to upper input leaving result 
-    if (event.target.getAttribute('data-action') === 'solve') {
-        solvedInput.value = input.value
-        input.value = result
-      }     
-      if (event.target.getAttribute('data-action') === 'clear') {
+    const action = event.target.getAttribute('data-action')
+    if (action === 'solve') {
+        result = getResult(num1, operator, num2);
+        console.log(getResult(num1, operator, num2))
+        
+    }
+    if (action === 'clear') {
         clear()
     }
 }
+
 function clear() {
     input.value = ''
     solvedInput.value = ''
@@ -98,22 +113,28 @@ function clear() {
     num2 = null;
     result = null;
     operator = null;
+    previousOperator = null;
 
 }
 
 allButtons.forEach(button => {
     button.addEventListener('click', event => {
-        display(event);
+        
         getOperatorNums(event);
-       
-        if(button.textContent === '='){
-           result = getResult(num1, operator, num2)
-           num1 = input.value
-           num2 = 0;
-            
+        display(event);
+        if(button.textContent === '='){    
+            solvedInput.value = `${Number(num1)} ${operator} ${Number(num2)} =`;
+            num1 = input.value;
+            num2 = 0;   
+           
+           previousOperator = operator
+           operator = null;
+           console.log(solvedInput.value, input.value)
+                 
+
         }
         
-        console.log(num1, operator, num2, result)
+        
     
     });
 });
